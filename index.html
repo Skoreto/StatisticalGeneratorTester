@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -10,8 +9,6 @@
     <link href="content/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="content/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="content/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
-
-
 </head>
 <body>
 
@@ -47,7 +44,6 @@
                     <br/>
 
 
-
                     <button class="btn btn-default" id="btnPreviousStep" onclick="previousStep();" disabled="disabled">Předchozí krok</button>
                     <button class="btn btn-default" id="btnNextStep" onclick="nextStep();">Další krok</button>
 
@@ -58,18 +54,12 @@
                     <button class="btn btn-primary" id="btnCalculate" onclick="calculate();">Spočítej</button>
 
 
-
-
-
-                    <!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Schovat menu</a> -->
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-
-
 
 <script src="content/js/jquery.js"></script>
 <script type="text/javascript" src="content/js/bootstrap.min.js"></script>
@@ -83,16 +73,17 @@
             });
 </script>
 
-
 <script>
     function calculate() {
-
-
+        var listNumbers = [];
+        for(i = 0; i < 100; i++) {
+            listNumbers[i] = Math.floor(Math.random() * 10);
+            $("#numberBox").append(listNumbers[i]);
+            $("#numberBox").append("<br/>");
+        }
 
     }
 </script>
-
-
 
 </body>
 </html>
