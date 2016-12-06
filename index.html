@@ -44,8 +44,7 @@
                     <br/>
 
 
-                    <button class="btn btn-default" id="btnPreviousStep" onclick="previousStep();" disabled="disabled">Předchozí krok</button>
-                    <button class="btn btn-default" id="btnNextStep" onclick="nextStep();">Další krok</button>
+
 
 
                     <br/>
@@ -61,29 +60,8 @@
     </div>
 </div>
 
-<script src="content/js/jquery.js"></script>
-<script type="text/javascript" src="content/js/bootstrap.min.js"></script>
-
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle")
-            .click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-</script>
-
-<script>
-    function calculate() {
-        var listNumbers = [];
-        for(i = 0; i < 100; i++) {
-            listNumbers[i] = Math.floor(Math.random() * 10);
-            $("#numberBox").append(listNumbers[i]);
-            $("#numberBox").append("<br/>");
-        }
-
-    }
-</script>
-
+<script src="content/js/jquery.js" type="text/javascript"></script>
+<script src="content/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="content/js/main.js" type="text/javascript"></script>
 </body>
 </html>
