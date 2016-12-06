@@ -70,5 +70,25 @@ function calculate() {
     $("#extremalBox").append("D(P) = " + extremalD + "<br/>");
     $("#extremalBox").append("U = " + extremalU + "<br/>");
 
+    // TEST ZNAMENEK DIFFERENCI
+    var diffE = (n - 1) / 2;
+    var diffD = (n + 1) / 12
+
+    var diffC = 0;
+    for(i = 0; i < n - 1; i++) {
+        if (listNumbers[i + 1] > listNumbers[i]) {
+            diffC += 1;
+        }
+    }
+
+    var diffU = (diffC - diffE) / Math.sqrt(diffD);
+
+    $("#diffBox").append("N = " + n + "<br/>");
+    $("#diffBox").append("C = " + diffC + "<br/>");
+    $("#diffBox").append("E(C) = " + diffE + "<br/>");
+    $("#diffBox").append("D(C) = " + diffD + "<br/>");
+    $("#diffBox").append("U = " + diffU + "<br/>");
+
+
 
 }
