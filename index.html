@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Tomáš Skořepa">
+    <title>STMOD | Seminární práce</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="content/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="content/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Druhy testů
+                </a>
+            </li>
+            <li>
+                <a href="#">Testy knihoven</a>
+            </li>
+            <li>
+                <a href="#">Testy vlastních čísel</a>
+            </li>
+
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Testování JavaScriptových knihoven generátorů náhodných čísel</h1>
+
+                    <br/>
+
+                    <h3>Generovaná čísla</h3>
+                    <div class="bg-warning" id="numberBox">
+
+                    </div>
+                    <br/>
+
+
+
+                    <button class="btn btn-default" id="btnPreviousStep" onclick="previousStep();" disabled="disabled">Předchozí krok</button>
+                    <button class="btn btn-default" id="btnNextStep" onclick="nextStep();">Další krok</button>
+
+
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="btnCalculate" onclick="calculate();">Spočítej</button>
+
+
+
+
+
+                    <!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Schovat menu</a> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="content/js/jquery.js"></script>
+<script type="text/javascript" src="content/js/bootstrap.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle")
+            .click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+</script>
+
+
+<script>
+    function calculate() {
+
+
+
+    }
+</script>
+
+
+
+</body>
+</html>
