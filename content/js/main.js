@@ -91,4 +91,40 @@ function calculate() {
 
 
 
+    // SPEARMANUV PORADOVY KOEFICIENT KORELACE
+    $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'><tr><th>x</th><th>Ri</th><th>Qi</th><th>di</th><th>di2</th></tr></table>");
+
+    var listRi = [];
+    for(i = 1; i <= n; i++) {
+        listRi[i - 1] = i;
+    }
+
+    var listQi = [];
+    var listdi = [];
+    var listdi2 = [];
+    var sumdi2 = 0;
+    for(i = 0; i < n; i++) {
+        listQi[i] = 0;
+        for(j = 0; j < n; j++) {
+            if(listNumbers[j] <= listNumbers[i]) {
+                listQi[i] += 1;
+            }
+        }
+        listdi[i] = listRi[i] - listQi[i];
+        listdi2[i] = Math.abs(listdi[i]) * Math.abs(listdi[i]);
+        $("#spearmanTable").append("<tr><td>" + listNumbers[i] + "</td><td>" + listRi[i] + "</td><td>" + listQi[i] +
+            "</td><td>" + listdi[i] + "</td><td>" + listdi2[i] + "</td></tr>");
+    }
+
+    var spearmanE = 0;
+    var spearmanD = 1 / (n - 1);
+    var spearmanR = 1 - (6/(n * (n * n - 1))) * sumdi2;
+    var spearmanU = spearmanR * Math.sqrt(n - 1);
+
+    $("#spearmanBox").append("<br/>" + "E(rs) = " + spearmanE + "<br/>");
+    $("#spearmanBox").append("D(rs) = " + spearmanD + "<br/>");
+    $("#spearmanBox").append("suma di2 = " + sumdi2 + "<br/>");
+    $("#spearmanBox").append("r = " + spearmanR + "<br/>");
+    $("#spearmanBox").append("u = " + spearmanU + "<br/>");
+
 }
