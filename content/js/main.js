@@ -49,6 +49,7 @@ function calculate() {
 
     // Obecne
     var n = listNumbers.length;
+    var u0975 = 1.96;
 
     // TEST BODU ZVRATU
     var extremalE = (2 * (n - 2)) / 3;
@@ -126,5 +127,63 @@ function calculate() {
     $("#spearmanBox").append("suma di2 = " + sumdi2 + "<br/>");
     $("#spearmanBox").append("r = " + spearmanR + "<br/>");
     $("#spearmanBox").append("u = " + spearmanU + "<br/>");
+
+    // SERIALNI KORELACE
+    $("#serialBox").append("<table class='table table-striped table-condensed' id='serialTable'><tr><th>k</th><th>rk</th><th>rk * odm(n - k)</th><th>Výsledek pro alfa = 0,05</th></tr></table>");
+
+    // TODO k < n
+    for(k = 1; k <= 10; k++) {
+        // Cinitel
+        var pom1 = 0;
+        for(i = 1; i <= n - k; i++) {
+            var sumXj1 = 0;
+            for(j = 1; j <= n - k; j++) {
+                sumXj1 += listNumbers[j - 1];
+            }
+
+            var sumXj2 = 0;
+            for(j = k; j <= n; j++) {
+                sumXj2 += listNumbers[j - 1];
+            }
+            pom1 += (listNumbers[i - 1] - (1 / (n - k)) * sumXj1) * (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj2);
+        }
+        var rkCov = pom1 / (n - k);
+
+        // Jmenovatel leva cast
+        var sum3 = 0;
+        for(i = 1; i <= n - k; i++) {
+            var sumXj3 = 0;
+            for(j = 1; j <= n - k; j++) {
+                sumXj3 += listNumbers[j - 1];
+            }
+            sum3 += (listNumbers[i - 1] - (1 / (n - k)) * sumXj3) * (listNumbers[i - 1] - (1 / (n - k)) * sumXj3);
+        }
+        var variance1 = (1 / (n - k)) * sum3;
+
+        // Jmenovatel prava cast
+        var sum4 = 0;
+        for(i = 1; i <= n - k; i++) {
+            var sumXj4 = 0;
+            for(j = k; j <= n; j++) {
+                sumXj4 += listNumbers[j - 1];
+            }
+            sum4 += (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4) * (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4);
+        }
+        var variance2 = (1 / (n - k)) * sum4;
+
+        // Celkovy jmenovatel
+        var overallDenominator = Math.sqrt(variance1 * variance2);
+
+        var rk = rkCov / overallDenominator;
+        var rkU = rk * Math.sqrt(n - k);
+
+        var resultText;
+        if (rkU > u0975) {
+            resultText = "<span class='text-red'><b>Zamítá</b></span> se hyp. o nulovém koef. seriální korelace."
+        } else {
+            resultText = "<span class='text-green'><b>Nezamítá</b></span> se hyp. o nulovém koef. seriální korelace."
+        }
+        $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk + "</td><td>" + rkU + "</td><td>" + resultText + "</td></tr>");
+    }
 
 }
