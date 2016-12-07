@@ -49,7 +49,7 @@ function calculate() {
 
     // Obecne
     var n = listNumbers.length;
-    var u0975 = 1.96;
+    var u0975 = 1.959963985;
 
     // TEST BODU ZVRATU
     var extremalE = (2 * (n - 2)) / 3;
@@ -65,11 +65,11 @@ function calculate() {
 
     var extremalU = (extremalP - extremalE) / Math.sqrt(extremalD);
 
-    $("#extremalBox").append("N = " + n + "<br/>");
-    $("#extremalBox").append("P = " + extremalP + "<br/>");
-    $("#extremalBox").append("E(P) = " + extremalE + "<br/>");
-    $("#extremalBox").append("D(P) = " + extremalD + "<br/>");
-    $("#extremalBox").append("U = " + extremalU + "<br/>");
+    $("#extremalBox").append("$n$ = " + n + "<br/>");
+    $("#extremalBox").append("$P$ = " + extremalP + "<br/>");
+    $("#extremalBox").append("$E(P)$ = " + extremalE + "<br/>");
+    $("#extremalBox").append("$D(P)$ = " + extremalD + "<br/>");
+    $("#extremalBox").append("$u$ = " + extremalU + "<br/>");
 
     // TEST ZNAMENEK DIFFERENCI
     var diffE = (n - 1) / 2;
@@ -84,16 +84,17 @@ function calculate() {
 
     var diffU = (diffC - diffE) / Math.sqrt(diffD);
 
-    $("#diffBox").append("N = " + n + "<br/>");
-    $("#diffBox").append("C = " + diffC + "<br/>");
-    $("#diffBox").append("E(C) = " + diffE + "<br/>");
-    $("#diffBox").append("D(C) = " + diffD + "<br/>");
-    $("#diffBox").append("U = " + diffU + "<br/>");
+    $("#diffBox").append("$n$ = " + n + "<br/>");
+    $("#diffBox").append("$C$ = " + diffC + "<br/>");
+    $("#diffBox").append("$E(C)$ = " + diffE + "<br/>");
+    $("#diffBox").append("$D(C)$ = " + diffD + "<br/>");
+    $("#diffBox").append("$u$ = " + diffU + "<br/>");
 
 
 
     // SPEARMANUV PORADOVY KOEFICIENT KORELACE
-    $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'><tr><th>x</th><th>Ri</th><th>Qi</th><th>di</th><th>di2</th></tr></table>");
+    $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'>" +
+        "<tr><th>$x$</th><th>$R_i$</th><th>$Q_i$</th><th>$d_i$</th><th>$d_i^2$</th></tr></table>");
 
     var listRi = [];
     for(i = 1; i <= n; i++) {
@@ -115,6 +116,7 @@ function calculate() {
         listdi2[i] = Math.abs(listdi[i]) * Math.abs(listdi[i]);
         $("#spearmanTable").append("<tr><td>" + listNumbers[i] + "</td><td>" + listRi[i] + "</td><td>" + listQi[i] +
             "</td><td>" + listdi[i] + "</td><td>" + listdi2[i] + "</td></tr>");
+        sumdi2 += listdi2[i];
     }
 
     var spearmanE = 0;
@@ -122,14 +124,15 @@ function calculate() {
     var spearmanR = 1 - (6/(n * (n * n - 1))) * sumdi2;
     var spearmanU = spearmanR * Math.sqrt(n - 1);
 
-    $("#spearmanBox").append("<br/>" + "E(rs) = " + spearmanE + "<br/>");
-    $("#spearmanBox").append("D(rs) = " + spearmanD + "<br/>");
+    $("#spearmanBox").append("<br/>" + "$E(r_s)$ = " + spearmanE + "<br/>");
+    $("#spearmanBox").append("$D(r_s)$ = " + spearmanD + "<br/>");
     $("#spearmanBox").append("suma di2 = " + sumdi2 + "<br/>");
-    $("#spearmanBox").append("r = " + spearmanR + "<br/>");
-    $("#spearmanBox").append("u = " + spearmanU + "<br/>");
+    $("#spearmanBox").append("$r_s$ = " + spearmanR + "<br/>");
+    $("#spearmanBox").append("$u$ = " + spearmanU + "<br/>");
 
     // SERIALNI KORELACE
-    $("#serialBox").append("<table class='table table-striped table-condensed' id='serialTable'><tr><th>k</th><th>rk</th><th>rk * odm(n - k)</th><th>Výsledek pro alfa = 0,05</th></tr></table>");
+    $("#serialBox").append("<table class='table table-striped table-condensed' id='serialTable'>" +
+        "<tr><th>$k$</th><th>$r_k$</th><th>$r_k \\sqrt{n-k}$</th><th>Výsledek pro $\\alpha = 0,05$</th></tr></table>");
 
     // TODO k < n
     for(k = 1; k <= 10; k++) {
@@ -167,7 +170,8 @@ function calculate() {
             for(j = k; j <= n; j++) {
                 sumXj4 += listNumbers[j - 1];
             }
-            sum4 += (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4) * (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4);
+            sum4 += (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4)
+                * (listNumbers[i + k - 1] - (1 / (n - k)) * sumXj4);
         }
         var variance2 = (1 / (n - k)) * sum4;
 
@@ -183,7 +187,13 @@ function calculate() {
         } else {
             resultText = "<span class='text-green'><b>Nezamítá</b></span> se hyp. o nulovém koef. seriální korelace."
         }
-        $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk + "</td><td>" + rkU + "</td><td>" + resultText + "</td></tr>");
+        $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk + "</td><td>"
+            + rkU + "</td><td>" + resultText + "</td></tr>");
     }
 
+    // Refresh MathJax
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "extremalBox"]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "diffBox"]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "spearmanBox"]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "serialBox"]);
 }

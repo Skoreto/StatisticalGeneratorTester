@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Testování JavaScriptových knihoven generátorů náhodných čísel">
     <meta name="author" content="Tomáš Skořepa">
     <title>STMOD | Seminární práce</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -26,7 +26,6 @@
             <li>
                 <a href="#">Testy vlastních čísel</a>
             </li>
-
         </ul>
     </div>
     <div id="page-content-wrapper">
@@ -51,7 +50,8 @@
                     <br/>
 
                     <button class="btn btn-primary" id="btnCalculate" onclick="calculate();">Spočítej</button>
-                    <input type="checkbox" id="calculateOwnNumbers" checked="checked"> Počítat z vlastních čísel
+                    <input type="checkbox" id="calculateOwnNumbers"
+                           checked="checked"> Počítat z vlastních čísel</input>
 
                     <br/>
                     <br/>
@@ -82,9 +82,16 @@
         </div>
     </div>
 </div>
-
-<script src="content/js/jquery.js" type="text/javascript"></script>
-<script src="content/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="content/js/main.js" type="text/javascript"></script>
+<script type="text/javascript" src="content/js/jquery.js"></script>
+<script type="text/javascript" src="content/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="content/js/main.js"></script>
+<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+        CommonHTML: {scale: 90}
+        });
+</script>
+<script type="text/javascript" async
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
