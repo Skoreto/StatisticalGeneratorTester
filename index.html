@@ -1,8 +1,9 @@
 <!doctype html>
-<html>
+<html lang="cs">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Testování JavaScriptových knihoven generátorů náhodných čísel">
     <meta name="author" content="Tomáš Skořepa">
     <title>STMOD | Seminární práce</title>
@@ -21,10 +22,13 @@
                 </a>
             </li>
             <li>
-                <a href="#">Testy knihoven</a>
+                <a href="index.html">JavaScript generátor</a>
             </li>
             <li>
-                <a href="#">Testy vlastních čísel</a>
+                <a href="randomJS.html">Knihovna Random.js</a>
+            </li>
+            <li>
+                <a href="#">Zadat vlastní čísla</a>
             </li>
         </ul>
     </div>
@@ -36,10 +40,50 @@
 
                     <br/>
 
-                    <h3>Generovaná čísla</h3>
-                    <div class="bg-warning" id="numberBox">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3>Výběr generátoru</h3>
+                            <br/>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="survey" id="optradioDefaultJS" checked="checked">
+                                    Defaultní JavaScript random
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="survey" id="optradioRandomJS">
+                                    Knihovna Random.js
+                                </label>
+                            </div>
+                            <div class="radio disabled">
+                                <label>
+                                    <input type="radio" name="survey" id="optradioChanceJS" disabled>
+                                    Not sure
+                                </label>
+                            </div>
+
+                            <br/>
+                            <button class="btn btn-info" id="btnGenerate"
+                                    onclick="generateNumbers();">Generovat</button>
+                            <button class="btn btn-primary" id="btnTestAll"
+                                    onclick="testAll();" disabled>Testuj vše</button>
+                            <input type="checkbox" id="calculateOwnNumbers"> Počítat z vlastních čísel</input>
+                        </div>
+                        <div class="col-sm-8">
+                            <h3>Generovaná čísla</h3>
+                            <div class="form-group">
+                                <textarea class="form-control" id="numberArea"></textarea>
+                            </div>
+
+
+
+                        </div>
                     </div>
 
+
+
+                    <br/>
                     <br/>
 
                     <h3>Vlastní čísla</h3>
@@ -49,9 +93,23 @@
 
                     <br/>
 
-                    <button class="btn btn-primary" id="btnCalculate" onclick="calculate();">Spočítej</button>
-                    <input type="checkbox" id="calculateOwnNumbers"
-                           checked="checked"> Počítat z vlastních čísel</input>
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="btn btn-success" id="btnTestExtremal"
+                                            onclick="testExtremal();">Testovat</button></td>
+                                <td>Test bodů zvratu</td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-success" id="btnTestDifference"
+                                            onclick="testDifference();">Testovat</button></td>
+                                <td>Test bodů zvratu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
 
                     <br/>
                     <br/>
@@ -84,7 +142,8 @@
 </div>
 <script type="text/javascript" src="content/js/jquery.js"></script>
 <script type="text/javascript" src="content/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="content/js/main.js"></script>
+<script src="content/externalGenerators/random.min.js"></script>
+<script type="text/javascript" src="content/js/main.js" charset="utf-8"></script>
 <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},

@@ -1,8 +1,30 @@
-/**
- * Created by Tomas.
- */
-function calculate() {
-//        $("#ownNumbersArea").append("0.152" + "\n");
+var listNumbers = [];
+
+function generateNumbers() {
+    if (document.getElementById("optradioDefaultJS").checked) {
+        for(i = 0; i < 1000; i++) {
+            listNumbers[i] = Math.floor(Math.random() * 10);
+            $("#numberArea").append(listNumbers[i] + "\n");
+        }
+    }
+
+    if (document.getElementById("optradioRandomJS").checked) {
+        // Random is now available as a global (on the window object)
+        var random = new Random();
+        for(i = 0; i < 1000; i++) {
+            listNumbers[i] = random.integer(0, 9);
+            $("#numberArea").append(listNumbers[i] + "\n");
+        }
+    }
+
+    $("#btnTestAll").prop('disabled', false);
+}
+
+function testAll() {
+
+    if (document.getElementById("calculateOwnNumbers").checked) {
+
+        //        $("#ownNumbersArea").append("0.152" + "\n");
 //        $("#ownNumbersArea").append("0.369" + "\n");
 //        $("#ownNumbersArea").append("0.495" + "\n");
 //        $("#ownNumbersArea").append("0.792" + "\n");
@@ -13,37 +35,30 @@ function calculate() {
 //        $("#ownNumbersArea").append("0.968" + "\n");
 //        $("#ownNumbersArea").append("0.698");
 
-    $("#ownNumbersArea").append("7" + "\n");
-    $("#ownNumbersArea").append("4" + "\n");
-    $("#ownNumbersArea").append("2" + "\n");
-    $("#ownNumbersArea").append("8" + "\n");
-    $("#ownNumbersArea").append("6" + "\n");
-    $("#ownNumbersArea").append("4" + "\n");
-    $("#ownNumbersArea").append("7" + "\n");
-    $("#ownNumbersArea").append("2" + "\n");
-    $("#ownNumbersArea").append("8" + "\n");
-    $("#ownNumbersArea").append("9" + "\n");
-    $("#ownNumbersArea").append("2" + "\n");
-    $("#ownNumbersArea").append("4" + "\n");
-    $("#ownNumbersArea").append("7" + "\n");
-    $("#ownNumbersArea").append("1" + "\n");
-    $("#ownNumbersArea").append("0" + "\n");
-    $("#ownNumbersArea").append("4");
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("8" + "\n");
+        $("#ownNumbersArea").append("6" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("8" + "\n");
+        $("#ownNumbersArea").append("9" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("1" + "\n");
+        $("#ownNumbersArea").append("0" + "\n");
+        $("#ownNumbersArea").append("4");
 
-    var listNumbers = [];
-    if (document.getElementById("calculateOwnNumbers").checked) {
+
         var textArea = document.getElementById("ownNumbersArea");
         var arrayOfLines = textArea.value.split("\n");
         for(var i = 0; i < arrayOfLines.length; i++){
             if (parseFloat(arrayOfLines[i]) != 'NaN') {
                 listNumbers[i] = parseFloat(arrayOfLines[i]);
             }
-        }
-    } else {
-        for(i = 0; i < 100; i++) {
-            listNumbers[i] = Math.floor(Math.random() * 10);
-            $("#numberBox").append(listNumbers[i]);
-            $("#numberBox").append("<br/>");
         }
     }
 
@@ -89,8 +104,6 @@ function calculate() {
     $("#diffBox").append("$E(C)$ = " + diffE + "<br/>");
     $("#diffBox").append("$D(C)$ = " + diffD + "<br/>");
     $("#diffBox").append("$u$ = " + diffU + "<br/>");
-
-
 
     // SPEARMANUV PORADOVY KOEFICIENT KORELACE
     $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'>" +
