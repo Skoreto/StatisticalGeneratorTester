@@ -1,5 +1,10 @@
 var listNumbers = [];
+var u0975 = 1.959963985;
+var n;
 
+/**
+ * Metoda pro generovani cisel na zaklade ruznych zdroju.
+ */
 function generateNumbers() {
     if (document.getElementById("optradioDefaultJS").checked) {
         for(i = 0; i < 1000; i++) {
@@ -17,54 +22,21 @@ function generateNumbers() {
         }
     }
 
-    $("#btnTestAll").prop('disabled', false);
+    $("#btnTestAllTests").prop('disabled', false);
 }
 
-function testAll() {
-
-    if (document.getElementById("calculateOwnNumbers").checked) {
-
-        //        $("#ownNumbersArea").append("0.152" + "\n");
-//        $("#ownNumbersArea").append("0.369" + "\n");
-//        $("#ownNumbersArea").append("0.495" + "\n");
-//        $("#ownNumbersArea").append("0.792" + "\n");
-//        $("#ownNumbersArea").append("0.306" + "\n");
-//        $("#ownNumbersArea").append("0.853" + "\n");
-//        $("#ownNumbersArea").append("0.882" + "\n");
-//        $("#ownNumbersArea").append("0.095" + "\n");
-//        $("#ownNumbersArea").append("0.968" + "\n");
-//        $("#ownNumbersArea").append("0.698");
-
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("8" + "\n");
-        $("#ownNumbersArea").append("6" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("8" + "\n");
-        $("#ownNumbersArea").append("9" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("1" + "\n");
-        $("#ownNumbersArea").append("0" + "\n");
-        $("#ownNumbersArea").append("4");
-
-
-        var textArea = document.getElementById("ownNumbersArea");
-        var arrayOfLines = textArea.value.split("\n");
-        for(var i = 0; i < arrayOfLines.length; i++){
-            if (parseFloat(arrayOfLines[i]) != 'NaN') {
-                listNumbers[i] = parseFloat(arrayOfLines[i]);
-            }
-        }
-    }
-
+function testCommon() {
     // Obecne
-    var n = listNumbers.length;
-    var u0975 = 1.959963985;
+    n = listNumbers.length;
+}
+
+/**
+ * Metoda pro testovani bodu zvratu.
+ */
+function testExtremal() {
+    emptyBoxes();
+    testCommon();
+    $("#extremalBox").append("<h3>Test bodů zvratu</h3>");
 
     // TEST BODU ZVRATU
     var extremalE = (2 * (n - 2)) / 3;
@@ -86,6 +58,17 @@ function testAll() {
     $("#extremalBox").append("$D(P)$ = " + extremalD + "<br/>");
     $("#extremalBox").append("$u$ = " + extremalU + "<br/>");
 
+    refreshMathJax()
+}
+
+/**
+ * Metoda pro vypocet testu znamenek diferenci.
+ */
+function testDifference() {
+    emptyBoxes();
+    testCommon();
+    $("#diffBox").append("<h3>Test znamének diferencí</h3>");
+
     // TEST ZNAMENEK DIFFERENCI
     var diffE = (n - 1) / 2;
     var diffD = (n + 1) / 12
@@ -104,6 +87,17 @@ function testAll() {
     $("#diffBox").append("$E(C)$ = " + diffE + "<br/>");
     $("#diffBox").append("$D(C)$ = " + diffD + "<br/>");
     $("#diffBox").append("$u$ = " + diffU + "<br/>");
+
+    refreshMathJax()
+}
+
+/**
+ * Metoda pro vypocet Spearmanova poradoveho koeficientu korelace.
+ */
+function testSpearman() {
+    emptyBoxes();
+    testCommon();
+    $("#diffBox").append("<h3>Spearmanův pořadový koeficient korelace</h3>");
 
     // SPEARMANUV PORADOVY KOEFICIENT KORELACE
     $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'>" +
@@ -142,6 +136,17 @@ function testAll() {
     $("#spearmanBox").append("suma di2 = " + sumdi2 + "<br/>");
     $("#spearmanBox").append("$r_s$ = " + spearmanR + "<br/>");
     $("#spearmanBox").append("$u$ = " + spearmanU + "<br/>");
+
+    refreshMathJax()
+}
+
+/**
+ * Metoda pro test serialni korelace.
+ */
+function testSerial() {
+    emptyBoxes();
+    testCommon();
+    $("#diffBox").append("<h3>Test seriální korelace</h3>");
 
     // SERIALNI KORELACE
     $("#serialBox").append("<table class='table table-striped table-condensed' id='serialTable'>" +
@@ -204,9 +209,81 @@ function testAll() {
             + rkU + "</td><td>" + resultText + "</td></tr>");
     }
 
-    // Refresh MathJax
+    refreshMathJax();
+}
+
+/**
+ * Metoda pro spusteni vsech testu.
+ */
+function testAllTests() {
+    testExtremal();
+    testDifference();
+    testSpearman();
+    testSerial()
+}
+
+/**
+ * Metoda pro ziskani vlastnich cisel zadanych do textArea.
+ */
+function getOwnNumbers() {
+
+    if (document.getElementById("calculateOwnNumbers").checked) {
+
+        //        $("#ownNumbersArea").append("0.152" + "\n");
+//        $("#ownNumbersArea").append("0.369" + "\n");
+//        $("#ownNumbersArea").append("0.495" + "\n");
+//        $("#ownNumbersArea").append("0.792" + "\n");
+//        $("#ownNumbersArea").append("0.306" + "\n");
+//        $("#ownNumbersArea").append("0.853" + "\n");
+//        $("#ownNumbersArea").append("0.882" + "\n");
+//        $("#ownNumbersArea").append("0.095" + "\n");
+//        $("#ownNumbersArea").append("0.968" + "\n");
+//        $("#ownNumbersArea").append("0.698");
+
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("8" + "\n");
+        $("#ownNumbersArea").append("6" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("8" + "\n");
+        $("#ownNumbersArea").append("9" + "\n");
+        $("#ownNumbersArea").append("2" + "\n");
+        $("#ownNumbersArea").append("4" + "\n");
+        $("#ownNumbersArea").append("7" + "\n");
+        $("#ownNumbersArea").append("1" + "\n");
+        $("#ownNumbersArea").append("0" + "\n");
+        $("#ownNumbersArea").append("4");
+
+
+        var textArea = document.getElementById("ownNumbersArea");
+        var arrayOfLines = textArea.value.split("\n");
+        for(var i = 0; i < arrayOfLines.length; i++){
+            if (parseFloat(arrayOfLines[i]) != 'NaN') {
+                listNumbers[i] = parseFloat(arrayOfLines[i]);
+            }
+        }
+    }
+}
+
+/**
+ * Metoda pro refresh MathJaxu ve vsech boxech.
+ */
+function refreshMathJax() {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "extremalBox"]);
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "diffBox"]);
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "spearmanBox"]);
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "serialBox"]);
+}
+
+/**
+ * Metoda pro promazani vsech boxu.
+ */
+function emptyBoxes() {
+    $("#extremalBox").empty();
+    $("#diffBox").empty();
+    $("#spearmanBox").empty();
+    $("#serialBox").empty();
 }

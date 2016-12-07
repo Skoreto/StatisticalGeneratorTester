@@ -42,7 +42,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <h3>Výběr generátoru</h3>
+                            <h2>Výběr generátoru</h2>
                             <br/>
                             <div class="radio">
                                 <label>
@@ -66,34 +66,30 @@
                             <br/>
                             <button class="btn btn-info" id="btnGenerate"
                                     onclick="generateNumbers();">Generovat</button>
-                            <button class="btn btn-primary" id="btnTestAll"
-                                    onclick="testAll();" disabled>Testuj vše</button>
+                            <button class="btn btn-primary" id="btnTestAllTests"
+                                    onclick="testAllTests();" disabled>Testuj vše</button>
                             <input type="checkbox" id="calculateOwnNumbers"> Počítat z vlastních čísel</input>
                         </div>
                         <div class="col-sm-8">
-                            <h3>Generovaná čísla</h3>
+                            <h2>Generovaná čísla</h2>
                             <div class="form-group">
-                                <textarea class="form-control" id="numberArea"></textarea>
+                                <textarea class="form-control" id="numberArea" readonly></textarea>
                             </div>
-
-
-
                         </div>
                     </div>
 
-
-
                     <br/>
                     <br/>
 
-                    <h3>Vlastní čísla</h3>
+                    <h2>Vlastní čísla</h2>
                     <div class="form-group">
                         <textarea class="form-control" rows="5" id="ownNumbersArea"></textarea>
                     </div>
 
                     <br/>
 
-                    <table class="table">
+                    <h2>Samostatné testy</h2>
+                    <table class="table table-condensed">
                         <thead>
                         </thead>
                         <tbody>
@@ -105,34 +101,38 @@
                             <tr>
                                 <td><button class="btn btn-success" id="btnTestDifference"
                                             onclick="testDifference();">Testovat</button></td>
-                                <td>Test bodů zvratu</td>
+                                <td>Test znamének diferencí</td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-success" id="btnTestSpearman"
+                                            onclick="testSpearman();">Testovat</button></td>
+                                <td>Spearmanův pořadový koeficient korelace</td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-success" id="btnTestSerial"
+                                            onclick="testSerial();">Testovat</button></td>
+                                <td>Test seriální korelace</td>
                             </tr>
                         </tbody>
                     </table>
 
-
-                    <br/>
                     <br/>
 
-                    <h3>Test bodů zvratu</h3>
                     <div id="extremalBox">
                     </div>
 
                     <br/>
 
-                    <h3>Test znamének diferencí</h3>
                     <div id="diffBox">
                     </div>
 
                     <br/>
 
-                    <h3>Spearmanův pořadový koeficient korelace</h3>
                     <div id="spearmanBox">
                     </div>
 
                     <br/>
 
-                    <h3>Test seriální korelace</h3>
                     <div id="serialBox">
                     </div>
                 </div>
