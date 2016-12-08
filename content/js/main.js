@@ -164,11 +164,11 @@ function testSpearman() {
     var spearmanR = 1 - (6/(n * (n * n - 1))) * sumdi2;
     var spearmanU = spearmanR * Math.sqrt(n - 1);
 
-    $("#spearmanResultsBox").append("<br/>" + "$E(r_s)$ = " + spearmanE + "<br/>");
+    $("#spearmanResultsBox").append("$E(r_s)$ = " + spearmanE + "<br/>");
     $("#spearmanResultsBox").append("$D(r_s)$ = " + spearmanD.toFixed(4) + "<br/>");
     $("#spearmanResultsBox").append("suma di2 = " + sumdi2 + "<br/>");
     $("#spearmanResultsBox").append("$r_s$ = " + spearmanR.toFixed(4) + "<br/>");
-    $("#spearmanResultsBox").append("$u$ = " + spearmanU.toFixed(4) + "<br/>");
+    $("#spearmanResultsBox").append("$u$ = " + spearmanU.toFixed(4) + "<br/><br/>");
 
     refreshMathJax()
 }
