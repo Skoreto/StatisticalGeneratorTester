@@ -6,23 +6,30 @@ var n;
  * Metoda pro generovani cisel na zaklade ruznych zdroju.
  */
 function generateNumbers() {
+    $("#generatedNumberArea").empty();
+    listNumbers = [];
+    var countNumbersGenerated = parseInt(document.getElementById("inpNumbersGenerated").value);
+
     if (document.getElementById("optradioDefaultJS").checked) {
-        for(i = 0; i < 1000; i++) {
+        for(i = 0; i < countNumbersGenerated; i++) {
             listNumbers[i] = Math.floor(Math.random() * 10);
-            $("#numberArea").append(listNumbers[i] + "\n");
+            $("#generatedNumberArea").append(listNumbers[i] + "\n");
         }
     }
 
     if (document.getElementById("optradioRandomJS").checked) {
         // Random is now available as a global (on the window object)
         var random = new Random();
-        for(i = 0; i < 1000; i++) {
+        for(i = 0; i < countNumbersGenerated; i++) {
             listNumbers[i] = random.integer(0, 9);
-            $("#numberArea").append(listNumbers[i] + "\n");
+            $("#generatedNumberArea").append(listNumbers[i] + "\n");
         }
     }
 
-    $("#btnTestAllTests").prop('disabled', false);
+    $("#btnTestExtremal").prop('disabled', false);
+    $("#btnTestDifference").prop('disabled', false);
+    $("#btnTestSpearman").prop('disabled', false);
+    $("#btnTestSerial").prop('disabled', false);
 }
 
 function testCommon() {
