@@ -86,9 +86,9 @@ function testExtremal() {
 
     $("#extremalBox").append("$n$ = " + n + "<br/>");
     $("#extremalBox").append("$P$ = " + extremalP + "<br/>");
-    $("#extremalBox").append("$E(P)$ = " + extremalE + "<br/>");
-    $("#extremalBox").append("$D(P)$ = " + extremalD + "<br/>");
-    $("#extremalBox").append("$u$ = " + extremalU + "<br/>");
+    $("#extremalBox").append("$E(P)$ = " + extremalE.toFixed(4) + "<br/>");
+    $("#extremalBox").append("$D(P)$ = " + extremalD.toFixed(4) + "<br/>");
+    $("#extremalBox").append("$u$ = " + extremalU.toFixed(4) + "<br/>");
 
     refreshMathJax()
 }
@@ -117,8 +117,8 @@ function testDifference() {
     $("#diffBox").append("$n$ = " + n + "<br/>");
     $("#diffBox").append("$C$ = " + diffC + "<br/>");
     $("#diffBox").append("$E(C)$ = " + diffE + "<br/>");
-    $("#diffBox").append("$D(C)$ = " + diffD + "<br/>");
-    $("#diffBox").append("$u$ = " + diffU + "<br/>");
+    $("#diffBox").append("$D(C)$ = " + diffD.toFixed(4) + "<br/>");
+    $("#diffBox").append("$u$ = " + diffU.toFixed(4) + "<br/>");
 
     refreshMathJax()
 }
@@ -132,6 +132,7 @@ function testSpearman() {
     $("#diffBox").append("<h3>Spearmanův pořadový koeficient korelace</h3>");
 
     // SPEARMANUV PORADOVY KOEFICIENT KORELACE
+    $("#spearmanBox").append("<div id='spearmanResultsBox'></div>");
     $("#spearmanBox").append("<table class='table table-striped table-condensed' id='spearmanTable'>" +
         "<tr><th>$x$</th><th>$R_i$</th><th>$Q_i$</th><th>$d_i$</th><th>$d_i^2$</th></tr></table>");
 
@@ -163,11 +164,11 @@ function testSpearman() {
     var spearmanR = 1 - (6/(n * (n * n - 1))) * sumdi2;
     var spearmanU = spearmanR * Math.sqrt(n - 1);
 
-    $("#spearmanBox").append("<br/>" + "$E(r_s)$ = " + spearmanE + "<br/>");
-    $("#spearmanBox").append("$D(r_s)$ = " + spearmanD + "<br/>");
-    $("#spearmanBox").append("suma di2 = " + sumdi2 + "<br/>");
-    $("#spearmanBox").append("$r_s$ = " + spearmanR + "<br/>");
-    $("#spearmanBox").append("$u$ = " + spearmanU + "<br/>");
+    $("#spearmanResultsBox").append("<br/>" + "$E(r_s)$ = " + spearmanE + "<br/>");
+    $("#spearmanResultsBox").append("$D(r_s)$ = " + spearmanD.toFixed(4) + "<br/>");
+    $("#spearmanResultsBox").append("suma di2 = " + sumdi2 + "<br/>");
+    $("#spearmanResultsBox").append("$r_s$ = " + spearmanR.toFixed(4) + "<br/>");
+    $("#spearmanResultsBox").append("$u$ = " + spearmanU.toFixed(4) + "<br/>");
 
     refreshMathJax()
 }
@@ -237,8 +238,8 @@ function testSerial() {
         } else {
             resultText = "<span class='text-green'><b>Nezamítá</b></span> se hyp. o nulovém koef. seriální korelace."
         }
-        $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk + "</td><td>"
-            + rkU + "</td><td>" + resultText + "</td></tr>");
+        $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk.toFixed(6) + "</td><td>"
+            + rkU.toFixed(6) + "</td><td>" + resultText + "</td></tr>");
     }
 
     refreshMathJax();
