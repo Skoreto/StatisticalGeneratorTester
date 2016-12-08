@@ -13,7 +13,7 @@ function generateNumbers() {
 
     if (document.getElementById("optradioDefaultJS").checked) {
         for(i = 0; i < countNumbersGenerated; i++) {
-            listNumbers[i] = Math.floor(Math.random() * 10);
+            listNumbers[i] = Math.random();
             $("#generatedNumberArea").append(listNumbers[i] + "\n");
         }
     }
@@ -84,11 +84,24 @@ function testExtremal() {
 
     var extremalU = (extremalP - extremalE) / Math.sqrt(extremalD);
 
+    $("#extremalBox").append("$H_0:$ Posloupnost čísel je náhodná<br/>");
+    $("#extremalBox").append("$H_1:$ Posloupnost čísel není náhodná<br/><br/>");
     $("#extremalBox").append("$n$ = " + n + "<br/>");
     $("#extremalBox").append("$P$ = " + extremalP + "<br/>");
     $("#extremalBox").append("$E(P)$ = " + extremalE.toFixed(4) + "<br/>");
     $("#extremalBox").append("$D(P)$ = " + extremalD.toFixed(4) + "<br/>");
-    $("#extremalBox").append("$u$ = " + extremalU.toFixed(4) + "<br/>");
+    $("#extremalBox").append("$u$ = " + extremalU.toFixed(4) + "<br/><br/>");
+
+    var resultRejected = Math.abs(extremalU) > u0975;
+    if (resultRejected) {
+        $("#extremalBox").append("$|u| > u_{1-{\\alpha / 2}}$<br/>");
+        $("#extremalBox").append(Math.abs(extremalU).toFixed(4) + " $>$ " + u0975.toFixed(2) + "<br/>");
+        $("#extremalBox").append("<span class='text-red'><b>Zamítá</b></span> se hypotéza o náhodnosti v uspořádání řady hodnot.");
+    } else {
+        $("#extremalBox").append("$|u| \\leq u_{1-{\\alpha / 2}}$<br/>");
+        $("#extremalBox").append(Math.abs(extremalU).toFixed(4) + " $\\leq$ " + u0975.toFixed(2) + "<br/>");
+        $("#extremalBox").append("<span class='text-green'><b>Nezamítá</b></span> se hypotéza o náhodnosti v uspořádání řady hodnot.");
+    }
 
     refreshMathJax()
 }
@@ -114,11 +127,24 @@ function testDifference() {
 
     var diffU = (diffC - diffE) / Math.sqrt(diffD);
 
+    $("#diffBox").append("$H_0:$ Posloupnost čísel je náhodná<br/>");
+    $("#diffBox").append("$H_1:$ Posloupnost čísel není náhodná<br/><br/>");
     $("#diffBox").append("$n$ = " + n + "<br/>");
     $("#diffBox").append("$C$ = " + diffC + "<br/>");
     $("#diffBox").append("$E(C)$ = " + diffE + "<br/>");
     $("#diffBox").append("$D(C)$ = " + diffD.toFixed(4) + "<br/>");
-    $("#diffBox").append("$u$ = " + diffU.toFixed(4) + "<br/>");
+    $("#diffBox").append("$u$ = " + diffU.toFixed(4) + "<br/><br/>");
+
+    var resultRejected = Math.abs(diffU) > u0975;
+    if (resultRejected) {
+        $("#diffBox").append("$|u| > u_{1-{\\alpha / 2}}$<br/>");
+        $("#diffBox").append(Math.abs(diffU).toFixed(4) + " $>$ " + u0975.toFixed(2) + "<br/>");
+        $("#diffBox").append("<span class='text-red'><b>Zamítá</b></span> se hypotéza o náhodnosti v uspořádání řady hodnot.");
+    } else {
+        $("#diffBox").append("$|u| \\leq u_{1-{\\alpha / 2}}$<br/>");
+        $("#diffBox").append(Math.abs(diffU).toFixed(4) + " $\\leq$ " + u0975.toFixed(2) + "<br/>");
+        $("#diffBox").append("<span class='text-green'><b>Nezamítá</b></span> se hypotéza o náhodnosti v uspořádání řady hodnot.");
+    }
 
     refreshMathJax()
 }
@@ -164,11 +190,25 @@ function testSpearman() {
     var spearmanR = 1 - (6/(n * (n * n - 1))) * sumdi2;
     var spearmanU = spearmanR * Math.sqrt(n - 1);
 
+    $("#spearmanResultsBox").append("$H_0: \\rho_s = 0$<br/>");
+    $("#spearmanResultsBox").append("$H_1: \\rho_s \\neq 0$ <br/><br/>");
     $("#spearmanResultsBox").append("$E(r_s)$ = " + spearmanE + "<br/>");
     $("#spearmanResultsBox").append("$D(r_s)$ = " + spearmanD.toFixed(4) + "<br/>");
-    $("#spearmanResultsBox").append("suma di2 = " + sumdi2 + "<br/>");
     $("#spearmanResultsBox").append("$r_s$ = " + spearmanR.toFixed(4) + "<br/>");
     $("#spearmanResultsBox").append("$u$ = " + spearmanU.toFixed(4) + "<br/><br/>");
+
+    var resultRejected = Math.abs(spearmanU) > u0975;
+    if (resultRejected) {
+        $("#spearmanResultsBox").append("$|u| > u_{1-{\\alpha / 2}}$<br/>");
+        $("#spearmanResultsBox").append(Math.abs(spearmanU).toFixed(4) + " $>$ " + u0975.toFixed(2) + "<br/>");
+        $("#spearmanResultsBox").append("<span class='text-red'><b>Zamítá</b></span> se hypotéza o nulovém " +
+            "koeficientu korelace nezávisloti na pořadí.<br/><br/>");
+    } else {
+        $("#spearmanResultsBox").append("$|u| \\leq u_{1-{\\alpha / 2}}$<br/>");
+        $("#spearmanResultsBox").append(Math.abs(spearmanU).toFixed(4) + " $\\leq$ " + u0975.toFixed(2) + "<br/>");
+        $("#spearmanResultsBox").append("<span class='text-green'><b>Nezamítá</b></span> se hypotéza o nulovém " +
+            "koeficientu korelace nezávisloti na pořadí.<br/><br/>");
+    }
 
     refreshMathJax()
 }
@@ -234,9 +274,9 @@ function testSerial() {
 
         var resultText;
         if (rkU > u0975) {
-            resultText = "<span class='text-red'><b>Zamítá</b></span> se hyp. o nulovém koef. seriální korelace."
+            resultText = "<span class='text-red'><b>Zamítá</b></span> se hypotéza o nulovém koef. seriální korelace."
         } else {
-            resultText = "<span class='text-green'><b>Nezamítá</b></span> se hyp. o nulovém koef. seriální korelace."
+            resultText = "<span class='text-green'><b>Nezamítá</b></span> se hypotéza o nulovém koef. seriální korelace."
         }
         $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk.toFixed(6) + "</td><td>"
             + rkU.toFixed(6) + "</td><td>" + resultText + "</td></tr>");
