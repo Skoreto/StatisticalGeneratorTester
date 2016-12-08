@@ -138,11 +138,11 @@
     padding: 5px;
 }
 #generatedNumberArea {
-    max-width: 600px;
-    height: 600px;
+    width: 500px;
+    min-height: 250px;
     /*border: 2px solid rgba(235, 150, 0, 0.5);*/
     padding: 5px;
-    max-height: 150px;
+    /*max-height: 150px;*/
     /*overflow-y: scroll;*/
 }
 .text-green {
