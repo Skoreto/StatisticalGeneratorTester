@@ -7,8 +7,9 @@ var n;
  */
 function generateNumbers() {
     $("#generatedNumberArea").empty();
-    listNumbers = [];
+    listNumbers.length = 0;
     var countNumbersGenerated = parseInt(document.getElementById("inpNumbersGenerated").value);
+    var seedNumber;
 
     if (document.getElementById("optradioDefaultJS").checked) {
         for(i = 0; i < countNumbersGenerated; i++) {
@@ -17,11 +18,35 @@ function generateNumbers() {
         }
     }
 
+    // Random knihovny Random.js
     if (document.getElementById("optradioRandomJS").checked) {
-        // Random is now available as a global (on the window object)
         var random = new Random();
+
+        // Pokud byl zadán seed
+        if (document.getElementById("inpSeedNumber").value != "") {
+            seedNumber = parseInt(document.getElementById("inpSeedNumber").value);
+            random.seed(seedNumber);
+        }
+
         for(i = 0; i < countNumbersGenerated; i++) {
             listNumbers[i] = random.integer(0, 9);
+            $("#generatedNumberArea").append(listNumbers[i] + "\n");
+        }
+    }
+
+    if (document.getElementById("optradioChanceJS").checked) {
+        var chance;
+        if (document.getElementById("inpSeedNumber").value != "") {
+            // Pokud byl zadan seed, nastav ho
+            seedNumber = parseInt(document.getElementById("inpSeedNumber").value);
+            chance = new Chance(seedNumber);
+        } else {
+            // Pokud nebyl zadan seed, generuj nahodne
+            chance = new Chance();
+        }
+
+        for(i = 0; i < countNumbersGenerated; i++) {
+            listNumbers[i] = chance.random();
             $("#generatedNumberArea").append(listNumbers[i] + "\n");
         }
     }
