@@ -66,6 +66,10 @@
     line-height: 40px;
 }
 
+ .sidebar-nav li.active {
+     background: #007cae;
+ }
+
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
@@ -138,13 +142,19 @@
     padding: 5px;
 }
 #generatedNumberArea {
-    width: 500px;
-    min-height: 250px;
+    /*width: 500px;*/
+    min-height: 650px;
     /*border: 2px solid rgba(235, 150, 0, 0.5);*/
-    padding: 5px;
     /*max-height: 150px;*/
     /*overflow-y: scroll;*/
 }
+ #ownNumbersArea {
+     /*width: 500px;*/
+     min-height: 320px;
+     /*border: 2px solid rgba(235, 150, 0, 0.5);*/
+     /*max-height: 150px;*/
+     /*overflow-y: scroll;*/
+ }
 .text-green {
     color: green;
 }
@@ -156,4 +166,15 @@
 }
 .text-center {
     text-align: center;
+}
+h1 {
+    color: #005d81;
+}
+h2 {
+    color: #424242;
+    font-size: 1.9em;
+}
+h3 {
+    color: #1B5E20;
+    font-size: 2em;
 }

@@ -57,6 +57,25 @@ function generateNumbers() {
     $("#btnTestSerial").prop('disabled', false);
 }
 
+/**
+ * Metoda pro ziskani vlastnich cisel zadanych do textArea.
+ */
+function getOwnNumbers() {
+    listNumbers.length = 0;
+    var textArea = document.getElementById("ownNumbersArea");
+    var arrayOfLines = textArea.value.split("\n");
+    for(var i = 0; i < arrayOfLines.length; i++){
+        if (parseFloat(arrayOfLines[i]) != 'NaN') {
+            listNumbers[i] = parseFloat(arrayOfLines[i]);
+        }
+    }
+
+    $("#btnTestExtremal").prop('disabled', false);
+    $("#btnTestDifference").prop('disabled', false);
+    $("#btnTestSpearman").prop('disabled', false);
+    $("#btnTestSerial").prop('disabled', false);
+}
+
 function testCommon() {
     // Obecne
     n = listNumbers.length;
@@ -319,52 +338,6 @@ function testAllTests() {
     testDifference();
     testSpearman();
     testSerial()
-}
-
-/**
- * Metoda pro ziskani vlastnich cisel zadanych do textArea.
- */
-function getOwnNumbers() {
-
-    if (document.getElementById("calculateOwnNumbers").checked) {
-
-        //        $("#ownNumbersArea").append("0.152" + "\n");
-//        $("#ownNumbersArea").append("0.369" + "\n");
-//        $("#ownNumbersArea").append("0.495" + "\n");
-//        $("#ownNumbersArea").append("0.792" + "\n");
-//        $("#ownNumbersArea").append("0.306" + "\n");
-//        $("#ownNumbersArea").append("0.853" + "\n");
-//        $("#ownNumbersArea").append("0.882" + "\n");
-//        $("#ownNumbersArea").append("0.095" + "\n");
-//        $("#ownNumbersArea").append("0.968" + "\n");
-//        $("#ownNumbersArea").append("0.698");
-
-        // $("#ownNumbersArea").append("7" + "\n");
-        // $("#ownNumbersArea").append("4" + "\n");
-        // $("#ownNumbersArea").append("2" + "\n");
-        // $("#ownNumbersArea").append("8" + "\n");
-        // $("#ownNumbersArea").append("6" + "\n");
-        // $("#ownNumbersArea").append("4" + "\n");
-        // $("#ownNumbersArea").append("7" + "\n");
-        // $("#ownNumbersArea").append("2" + "\n");
-        // $("#ownNumbersArea").append("8" + "\n");
-        // $("#ownNumbersArea").append("9" + "\n");
-        // $("#ownNumbersArea").append("2" + "\n");
-        // $("#ownNumbersArea").append("4" + "\n");
-        // $("#ownNumbersArea").append("7" + "\n");
-        // $("#ownNumbersArea").append("1" + "\n");
-        // $("#ownNumbersArea").append("0" + "\n");
-        // $("#ownNumbersArea").append("4");
-
-        listNumbers.length = 0;
-        var textArea = document.getElementById("ownNumbersArea");
-        var arrayOfLines = textArea.value.split("\n");
-        for(var i = 0; i < arrayOfLines.length; i++){
-            if (parseFloat(arrayOfLines[i]) != 'NaN') {
-                listNumbers[i] = parseFloat(arrayOfLines[i]);
-            }
-        }
-    }
 }
 
 /**
