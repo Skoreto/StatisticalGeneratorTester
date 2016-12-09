@@ -219,12 +219,15 @@ function testSpearman() {
 function testSerial() {
     emptyBoxes();
     testCommon();
-    $("#diffBox").append("<h3>Test seriální korelace</h3>");
+    $("#serialBox").append("<h3>Seriální koeficient korelace</h3>");
+    $("#serialBox").append("$H_0: \\rho_k = 0$<br/>");
+    $("#serialBox").append("$H_1: \\rho_k \\neq 0$ <br/><br/>");
 
     // SERIALNI KORELACE
     $("#serialBox").append("<table class='table table-striped table-condensed' id='serialTable'>" +
         "<tr><th>$k$</th><th>$r_k$</th><th>$r_k \\sqrt{n-k}$</th><th>Výsledek pro $\\alpha = 0,05$</th></tr></table>");
 
+    var cochSumri2 = 0;
     // TODO k < n
     for(k = 1; k <= 10; k++) {
         // Cinitel
@@ -270,6 +273,7 @@ function testSerial() {
         var overallDenominator = Math.sqrt(variance1 * variance2);
 
         var rk = rkCov / overallDenominator;
+        cochSumri2 += rk * rk;
         var rkU = rk * Math.sqrt(n - k);
 
         var resultText;
@@ -280,6 +284,28 @@ function testSerial() {
         }
         $("#serialTable").append("<tr><td>" + k + "</td><td>" + rk.toFixed(6) + "</td><td>"
             + rkU.toFixed(6) + "</td><td>" + resultText + "</td></tr>");
+    }
+
+    // VYSLEDKY COCHRANOVA TESTU
+    var cochQ = n * cochSumri2;
+    var Q0975_10 = 18.307;
+
+    $("#serialBox").append("<h3>Cochranův test</h3>");
+    $("#serialBox").append("$H_0: \\rho_1 = \\rho_2 = \\ldots = \\rho_k = 0$ pro $i = 1, 2, \\ldots , k$<br/>");
+    $("#serialBox").append("$H_1: \\rho_i \\neq 0$ pro al. jedno $i$ <br/><br/>");
+    $("#serialBox").append("$Q = \\sum_{i=1}^k r_i^2 \\doteq " + n + "\\cdot" + cochSumri2.toFixed(6) +
+        " \\doteq " + cochQ.toFixed(3) + "$<br/>");
+    $("#serialBox").append("$Q_{1-{\\alpha / 2}, k} = Q_{0.975, 10} = " + Q0975_10 + "$<br/><br/>");
+
+    var resultRejected = cochQ > Q0975_10;
+    if (resultRejected) {
+        $("#serialBox").append("$Q > Q_{1-{\\alpha / 2}, k}$<br/>");
+        $("#serialBox").append(cochQ.toFixed(3) + " $>$ " + Q0975_10 + "<br/><br/>");
+        $("#serialBox").append("<span class='text-red'><b>Zamítá</b></span> se sdružená hypotéza.<br/><br/>");
+    } else {
+        $("#serialBox").append("$Q \\leq Q_{1-{\\alpha / 2}, k}$<br/>");
+        $("#serialBox").append(cochQ.toFixed(3) + " $\\leq$ " + Q0975_10 + "<br/><br/>");
+        $("#serialBox").append("<span class='text-green'><b>Nezamítá</b></span> se sdružená hypotéza.<br/><br/>");
     }
 
     refreshMathJax();
@@ -313,24 +339,24 @@ function getOwnNumbers() {
 //        $("#ownNumbersArea").append("0.968" + "\n");
 //        $("#ownNumbersArea").append("0.698");
 
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("8" + "\n");
-        $("#ownNumbersArea").append("6" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("8" + "\n");
-        $("#ownNumbersArea").append("9" + "\n");
-        $("#ownNumbersArea").append("2" + "\n");
-        $("#ownNumbersArea").append("4" + "\n");
-        $("#ownNumbersArea").append("7" + "\n");
-        $("#ownNumbersArea").append("1" + "\n");
-        $("#ownNumbersArea").append("0" + "\n");
-        $("#ownNumbersArea").append("4");
+        // $("#ownNumbersArea").append("7" + "\n");
+        // $("#ownNumbersArea").append("4" + "\n");
+        // $("#ownNumbersArea").append("2" + "\n");
+        // $("#ownNumbersArea").append("8" + "\n");
+        // $("#ownNumbersArea").append("6" + "\n");
+        // $("#ownNumbersArea").append("4" + "\n");
+        // $("#ownNumbersArea").append("7" + "\n");
+        // $("#ownNumbersArea").append("2" + "\n");
+        // $("#ownNumbersArea").append("8" + "\n");
+        // $("#ownNumbersArea").append("9" + "\n");
+        // $("#ownNumbersArea").append("2" + "\n");
+        // $("#ownNumbersArea").append("4" + "\n");
+        // $("#ownNumbersArea").append("7" + "\n");
+        // $("#ownNumbersArea").append("1" + "\n");
+        // $("#ownNumbersArea").append("0" + "\n");
+        // $("#ownNumbersArea").append("4");
 
-
+        listNumbers.length = 0;
         var textArea = document.getElementById("ownNumbersArea");
         var arrayOfLines = textArea.value.split("\n");
         for(var i = 0; i < arrayOfLines.length; i++){
