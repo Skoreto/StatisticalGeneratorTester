@@ -8,16 +8,16 @@ $(document).ready(function() {
         if (this.value == 'optDefaultJS') {
             $("#inpSeedNumber").prop('disabled', true);
             $("#inpSeedNumber").val("");
-            $("#lblInpSeedNumber").text("Seed (volitelně):");
+            $("#lblInpSeedNumber").text("Seed (nelze):");
         }
-        else if (this.value == 'optRandomJS') {
+        else if (this.value == 'optSeedRandomJS') {
             $("#inpSeedNumber").prop('disabled', false);
             $("#inpSeedNumber").val("");
             $("#lblInpSeedNumber").text("Seed (volitelně):");
         }
         else if (this.value == 'optMersenne') {
             $("#inpSeedNumber").prop('disabled', false);
-            $("#inpSeedNumber").val(1013);
+            $("#inpSeedNumber").val(1023);
             $("#lblInpSeedNumber").text("Seed (povinně):");
         }
         else if (this.value == 'optChanceJS') {
@@ -62,19 +62,36 @@ function generateNumbers() {
         }
     }
 
-    // Random knihovny Random.js
-    if (document.getElementById("optradioRandomJS").checked) {
-        var random = new Random();
+    // Random knihovny seedrandom.js
+    if (document.getElementById("optradioSeedRandomJS").checked) {
+        // Nastavuje Math.random na GPNC zalozeny na ARC4, kteremu je nastaven automaticky seed pouzitim
+        // aktualniho casu, statusu HTML DOM, a dalsich lokalnich informaci.
+        var seedRandom = new Math.seedrandom();
 
         // Pokud byl zadán seed
         if (document.getElementById("inpSeedNumber").value != "") {
             seedNumber = parseInt(document.getElementById("inpSeedNumber").value);
-            random.seed(seedNumber);
+            seedRandom = new Math.seedrandom(seedNumber);
         }
 
         for(i = 0; i < countNumbersGenerated; i++) {
-            listNumbers[i] = random.integer(0, 9);
+            listNumbers[i] = seedRandom();
             $("#generatedNumberArea").append(listNumbers[i] + "\n");
+        }
+    }
+
+    // Random Mersenne Twister knihovny Random.js
+    if (document.getElementById("optradioMersenne").checked) {
+        // Pokud byl zadán seed (povinne)
+        if (document.getElementById("inpSeedNumber").value != "") {
+            seedNumber = parseInt(document.getElementById("inpSeedNumber").value);
+            var engine = Random.engines.mt19937().seed(seedNumber);
+            var random = new Random(engine);
+
+            for(i = 0; i < countNumbersGenerated; i++) {
+                listNumbers[i] = random.real(0, 1, false);
+                $("#generatedNumberArea").append(listNumbers[i] + "\n");
+            }
         }
     }
 
