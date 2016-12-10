@@ -35,6 +35,15 @@ $(document).ready(function() {
             $("#btnGenerate").prop('disabled', true);
         }
     });
+
+    // Validace vlastnich vkladanych cisel
+    $('#ownNumbersArea').bind('input propertychange', function() {
+        if (this.value.length) {
+            $("#btnGetOwnNumbers").prop('disabled', false);
+        } else {
+            $("#btnGetOwnNumbers").prop('disabled', true);
+        }
+    });
 });
 
 /**
