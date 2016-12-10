@@ -2,6 +2,41 @@ var listNumbers = [];
 var u0975 = 1.959963985;
 var n;
 
+$(document).ready(function() {
+    // Validace radio buttonu
+    $('input[type=radio][name=rGeneratorSelected]').change(function() {
+        if (this.value == 'optDefaultJS') {
+            $("#inpSeedNumber").prop('disabled', true);
+            $("#inpSeedNumber").val("");
+            $("#lblInpSeedNumber").text("Seed (volitelně):");
+        }
+        else if (this.value == 'optRandomJS') {
+            $("#inpSeedNumber").prop('disabled', false);
+            $("#inpSeedNumber").val("");
+            $("#lblInpSeedNumber").text("Seed (volitelně):");
+        }
+        else if (this.value == 'optMersenne') {
+            $("#inpSeedNumber").prop('disabled', false);
+            $("#inpSeedNumber").val(1013);
+            $("#lblInpSeedNumber").text("Seed (povinně):");
+        }
+        else if (this.value == 'optChanceJS') {
+            $("#inpSeedNumber").prop('disabled', false);
+            $("#inpSeedNumber").val("");
+            $("#lblInpSeedNumber").text("Seed (volitelně):");
+        }
+    });
+
+    // Validace poctu generovanych cisel
+    $('input[type=text][id=inpNumbersGenerated]').change(function() {
+        if (parseInt(this.value) > 0) {
+            $("#btnGenerate").prop('disabled', false);
+        } else {
+            $("#btnGenerate").prop('disabled', true);
+        }
+    });
+});
+
 /**
  * Metoda pro generovani cisel na zaklade ruznych zdroju.
  */
