@@ -17,7 +17,7 @@ $(document).ready(function() {
         }
         else if (this.value == 'optMersenne') {
             $("#inpSeedNumber").prop('disabled', false);
-            $("#inpSeedNumber").val(1023);
+            $("#inpSeedNumber").val(1213);
             $("#lblInpSeedNumber").text("Seed (povinně):");
         }
         else if (this.value == 'optChanceJS') {
@@ -389,6 +389,12 @@ function testSerial() {
     }
 
     refreshMathJax();
+}
+
+function testFrequency() {
+
+
+
 }
 
 /**

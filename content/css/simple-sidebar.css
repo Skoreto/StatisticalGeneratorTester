@@ -46,7 +46,6 @@
 
 /* Sidebar Styles */
 #sidebar-wrapper {
-    /*background: #00aff0;*/
     background: #0094ca;
 }
 
@@ -92,7 +91,6 @@
     font-size: 18px;
     line-height: 60px;
     background: #0094ca;
-    /*text-align: center;*/
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -142,18 +140,10 @@
     padding: 5px;
 }
 #generatedNumberArea {
-    /*width: 500px;*/
     min-height: 650px;
-    /*border: 2px solid rgba(235, 150, 0, 0.5);*/
-    /*max-height: 150px;*/
-    /*overflow-y: scroll;*/
 }
  #ownNumbersArea {
-     /*width: 500px;*/
      min-height: 320px;
-     /*border: 2px solid rgba(235, 150, 0, 0.5);*/
-     /*max-height: 150px;*/
-     /*overflow-y: scroll;*/
  }
 .text-green {
     color: green;
