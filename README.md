@@ -5,6 +5,7 @@ Implementace webové aplikace je založena na využití programovacího jazyku J
 <p align="center">
 <img src="http://imgur.com/IYDm2q8.jpg" alt="preview" />
 </p>
+
 ## Seriální koeficient korelace a Cochranův test
 Udává míru závislosti mezi sousedními nebo vzdálenějšími členy posloupnosti a pro k<n je definován vztahem [1]:
 <p align="center">
